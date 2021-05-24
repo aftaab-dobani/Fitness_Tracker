@@ -17,9 +17,13 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 
+app.use(require("./controllers/api"))
+app.use(require("./controllers/homeRoutes"))
 
 app.listen(PORT, () => {
     console.log('App running on PORT ${PORT}');
